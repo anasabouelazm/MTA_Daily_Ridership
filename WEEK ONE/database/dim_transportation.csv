@@ -1,0 +1,8 @@
+transport_id,transport_name,activity_measure
+1,Subways,Estimated Ridership
+2,Buses,Estimated Ridership
+3,LIRR,Estimated Ridership
+4,Metro-North,Estimated Ridership
+5,Access-A-Ride,Scheduled Trips
+6,Bridges and Tunnels,Traffic
+7,Staten Island Railway,Estimated Ridership
