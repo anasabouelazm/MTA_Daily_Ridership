@@ -7,6 +7,7 @@ units are never summed or compared as if they were the same quantity.
 
 from __future__ import annotations
 
+import os
 from pathlib import Path
 
 import numpy as np
@@ -16,12 +17,19 @@ import pandas as pd
 # ---------------------------------------------------------------------------
 # Paths and configuration
 # ---------------------------------------------------------------------------
+def _has_project_layout(root: Path) -> bool:
+    """Return True when root contains the Week 1 and Week 2 project folders."""
+    return (
+        (root / "WEEK ONE" / "python").is_dir()
+        and (root / "WEEK ONE" / "database").is_dir()
+        and (root / "WEEK TWO" / "python").is_dir()
+    )
+
+
 def find_project_root(start: Path) -> Path:
-    """Return the repository root, identified by its WEEK ONE folder."""
+    """Return the repository root containing the WEEK ONE and WEEK TWO folders."""
     for candidate in (start, *start.parents):
-        if (candidate / "WEEK ONE" / "python").is_dir() and (
-            candidate / "WEEK ONE" / "database"
-        ).is_dir():
+        if _has_project_layout(candidate):
             return candidate
     raise FileNotFoundError(
         "Could not locate the project root. Run from inside the repository "
@@ -29,9 +37,15 @@ def find_project_root(start: Path) -> Path:
     )
 
 
-PROJECT_ROOT = Path(
-    __import__("os").environ.get("MTA_PROJECT_ROOT", find_project_root(Path.cwd()))
-).expanduser().resolve()
+_env_root = os.environ.get("MTA_PROJECT_ROOT")
+if _env_root:
+    PROJECT_ROOT = Path(_env_root).expanduser().resolve()
+    if not _has_project_layout(PROJECT_ROOT):
+        raise FileNotFoundError(
+            f"MTA_PROJECT_ROOT is not a valid project root: {PROJECT_ROOT}"
+        )
+else:
+    PROJECT_ROOT = find_project_root(Path.cwd())
 WEEK1_DIR = PROJECT_ROOT / "WEEK ONE"
 WEEK2_DIR = PROJECT_ROOT / "WEEK TWO"
 CLEANED_PATH = WEEK1_DIR / "MTA_Daily_Ridership_Cleaned.csv"
