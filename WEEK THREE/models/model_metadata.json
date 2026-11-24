@@ -1,0 +1,110 @@
+{
+  "generated_from": "WEEK ONE/MTA_Daily_Ridership_Cleaned.csv",
+  "history_end": "2024-10-31",
+  "test_window_days": 60,
+  "horizons": [
+    7,
+    30
+  ],
+  "metrics": {
+    "primary": "MASE",
+    "supporting": [
+      "MAE",
+      "RMSE",
+      "WAPE",
+      "sMAPE"
+    ]
+  },
+  "selected": [
+    {
+      "transport": "Buses",
+      "horizon": 7,
+      "selected_model": "ETS",
+      "validation_MASE": 0.3117585764865132
+    },
+    {
+      "transport": "Subways",
+      "horizon": 7,
+      "selected_model": "SeasonalNaive",
+      "validation_MASE": 0.3386204612836213
+    },
+    {
+      "transport": "Staten Island Railway",
+      "horizon": 7,
+      "selected_model": "ETS",
+      "validation_MASE": 0.34679816663237073
+    },
+    {
+      "transport": "Access-A-Ride",
+      "horizon": 7,
+      "selected_model": "ETS",
+      "validation_MASE": 0.35571453468547315
+    },
+    {
+      "transport": "Bridges and Tunnels",
+      "horizon": 7,
+      "selected_model": "HistGBM",
+      "validation_MASE": 0.4749143274214125
+    },
+    {
+      "transport": "Buses",
+      "horizon": 30,
+      "selected_model": "SeasonalNaive",
+      "validation_MASE": 0.6102815145195498
+    },
+    {
+      "transport": "Bridges and Tunnels",
+      "horizon": 30,
+      "selected_model": "HistGBM",
+      "validation_MASE": 0.667448243905968
+    },
+    {
+      "transport": "Access-A-Ride",
+      "horizon": 30,
+      "selected_model": "ETS",
+      "validation_MASE": 0.712411305534117
+    },
+    {
+      "transport": "Staten Island Railway",
+      "horizon": 30,
+      "selected_model": "SeasonalNaive",
+      "validation_MASE": 0.7300850667707843
+    },
+    {
+      "transport": "Subways",
+      "horizon": 30,
+      "selected_model": "ETS",
+      "validation_MASE": 0.7531966006801006
+    },
+    {
+      "transport": "LIRR",
+      "horizon": 7,
+      "selected_model": "ETS",
+      "validation_MASE": 0.7730993350362168
+    },
+    {
+      "transport": "Metro-North",
+      "horizon": 7,
+      "selected_model": "ETS",
+      "validation_MASE": 0.7787003349770457
+    },
+    {
+      "transport": "Metro-North",
+      "horizon": 30,
+      "selected_model": "ETS",
+      "validation_MASE": 1.0826319546415122
+    },
+    {
+      "transport": "LIRR",
+      "horizon": 30,
+      "selected_model": "ETS",
+      "validation_MASE": 1.1724928844604123
+    }
+  ],
+  "versions": {
+    "python": "3.13.5",
+    "pandas": "2.3.3",
+    "sklearn": "1.9.1",
+    "statsmodels": "0.15.0"
+  }
+}
